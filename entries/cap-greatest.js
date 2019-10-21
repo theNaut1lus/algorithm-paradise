@@ -1,6 +1,6 @@
 console.log("loaded");
 
-function swap() {
+function largest() {
     console.log("called");
     var a = document.getElementById("value-a").value;
     var b = document.getElementById("value-b").value;

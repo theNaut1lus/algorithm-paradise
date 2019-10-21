@@ -1,0 +1,36 @@
+loginservlet page
+
+String username=request.getParameter("usrnm");
+String password=request.getParameter("pass");
+//validate the user
+//create a session
+String userid=username+"@123";
+HttpSession ses=request.getSession(true);
+ses.setAttribute("ID", userid);
+
+
+
+other Pages
+search and use session
+
+HttpSession ses1=request.getSession(false);
+
+if(ses1!=null && ses1.getAttribute("ID").equals(username+"@123"))
+{
+//display the contents
+}
+else
+//out.println("Invalid user");
+response.sendRedirect("/Login.html");
+
+
+
+Logout Page
+
+HttpSession ses2=request.getSession(false);
+
+if(ses2!=null && ses2.getAttribute("ID").equals(username))
+{
+ses2=null;
+ses2.invalidate();
+}

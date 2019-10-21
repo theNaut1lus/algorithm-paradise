@@ -1,0 +1,125 @@
+import simplegui
+import random
+
+ballposition= [300,300]
+ballvelocity= [0,0]
+pad1velocity=0
+pad2velocity=0
+pad1centre=[10,300]
+pad2centre=[590,300]
+pad1score= 0
+pad2score=0
+
+def start_game():
+    global ballvelocity,ballposition
+    ballposition[0] = 300
+    ballposition[1] = 300
+     
+       
+      
+           
+            
+    
+def movecontrol(inp):
+    global pad1velocity,pad2velocity
+    
+    if inp == simplegui.KEY_MAP['space'] and ballposition[0]==300 and ballposition[1]==300 :
+        
+        ballvelocity[1] = random.randint(-10,10)
+        ballvelocity[0] = random.randint(-10,10)
+    
+        
+        
+    elif inp == simplegui.KEY_MAP['up'] and pad2centre[1]>=88:
+                                
+        pad2velocity = -8
+                                
+    elif inp == simplegui.KEY_MAP['down'] and pad2centre[1]<=512:
+        
+        pad2velocity = 8
+        
+    elif inp == simplegui.KEY_MAP['w'] and pad1centre[1]>=88:
+        
+        pad1velocity = -8
+        
+    elif inp == simplegui.KEY_MAP['s'] and pad1centre[1]<=512:
+        
+        pad1velocity = 8
+        
+def stopcontrol(inp):
+    global pad1velocity,pad2velocity
+    
+    if inp == simplegui.KEY_MAP['up']:
+                                
+        pad2velocity = 0
+                                
+    elif inp == simplegui.KEY_MAP['down']:
+        
+        pad2velocity = 0
+        
+    elif inp == simplegui.KEY_MAP['w']:
+        
+        pad1velocity = 0
+        
+    elif inp == simplegui.KEY_MAP['s']:
+        
+        pad1velocity = 0
+        
+        
+        
+        
+def draw(canvas):
+    global ballposition,pad1centre,pad2centre,ballvelocity,pad1velocity,pad2velocity,pad1score, pad2score
+    ballposition[0] = ballposition[0] + ballvelocity[0]
+    ballposition[1] = ballposition[1] + ballvelocity[1]
+    pad1centre[1] = pad1centre[1] + pad1velocity
+    pad2centre[1] = pad2centre[1] + pad2velocity
+    
+    if(ballposition[1]>=570 or ballposition[1]<=30) :
+  
+     ballvelocity[1] = - ballvelocity[1]
+    
+    elif ballposition[0]>=560 and ballposition[0]<=570 and ballposition[1] < pad2centre[1]+100 and ballposition[1] > pad2centre[1]-100 :
+        
+        ballvelocity[0] = -ballvelocity[0]  
+        
+    elif ballposition[0]<=40 and ballposition[0]>=30 and ballposition[1] < pad1centre[1]+100 and ballposition[1] > pad1centre[1]-100 :
+        
+        ballvelocity[0] = -ballvelocity[0] 
+        
+    elif ballposition[0]==600  :
+        pad1score= pad1score+1
+        ballvelocity[1] = 0
+        ballvelocity[0] = 0 
+        
+        start_game()
+        
+    elif ballposition[0] == 0 :
+        pad2score = pad2score+1
+        ballvelocity[1] = 0
+        ballvelocity[0] = 0 
+        
+        start_game()
+        
+    elif pad1centre[1]<=86 or pad1centre[1]>=510:
+        pad1velocity = 0
+        
+    elif pad2centre[1]<=86 or pad2centre[1]>=510:
+        pad2velocity = 0
+        
+  
+        
+    canvas.draw_line([0,0],[600,0],8,'red')
+    canvas.draw_line([0,600],[600,600],8,'red')
+    canvas.draw_line([pad1centre[0],pad1centre[1]-80],[pad1centre[0],pad1centre[1]+80],18,'blue')
+    canvas.draw_line([pad2centre[0],pad2centre[1]-80],[pad2centre[0],pad2centre[1]+80],18,'green')
+    canvas.draw_circle(ballposition,20,2,'white','yellow')
+    canvas.draw_text(str(pad1score),[200,200],20,'white')
+    canvas.draw_text(str(pad2score),[400,200],20,'white')
+    
+frame = simplegui.create_frame('pong',600,600)
+frame.set_draw_handler(draw)
+frame.set_keydown_handler(movecontrol)
+frame.set_keyup_handler(stopcontrol)
+frame.start()
+start_game()

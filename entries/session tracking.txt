@@ -1,0 +1,43 @@
+login page(first page)
+
+String username=request.getParameter("usrnm");
+create a session
+
+HttpSession ses=request.getSession(true);
+ses.setAttribute("ID", username);
+
+
+other Pages
+search and use sesssion
+
+HttpSession ses1=request.getSession(false);
+
+if(ses1!=null && ses1.getAttribute("ID").equals(username))
+{
+
+}
+else
+out.println("Invalid user");
+
+Logout Page
+
+HttpSession ses2=request.getSession(false);
+
+if(ses2!=null && ses2.getAttribute("ID").equals(username))
+{
+ses2=null;
+ses2.invalidate();
+}
+
+To disable back button of browser:
+
+<head>
+  <SCRIPT type="text/javascript">
+     window.history.forward();
+     function noBack() { window.history.forward(); }
+</<SCRIPT>
+</head>
+
+
+<BODY onload="noBack();"
+     onpageshow="if (event.persisted) noBack();" onunload="">

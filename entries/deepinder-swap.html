@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>swapping algorithm</title>
+	<script type="text/javascript">
+		function swapnum() {
+			var first=document.getElementById("first");
+			var second=document.getElementById("second");
+			var temp;
+			temp=first.value;
+			first.value=second.value;
+			second.value=temp;
+		}
+	</script>
+</head>
+<body>
+Enter text : <input type="text" id="first"><br><br>
+Enter text : <input type="text" id="second"><br><br>
+<input type="button" value="Swap" onclick="swapnum()">
+</body>
+</html>

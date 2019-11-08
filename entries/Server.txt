@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>My Login Page</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: lightgrey;
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width:100%;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1><center>Login Page</center></h1>
+</header>
+<section>
+<form>
+Name: <input type="text"  placeholder="Enter UserName" name="fname" required>
+Password:<input type="password"  placeholder="Enter Password" name="pword" required>
+<button type="submit">Login</button>
+</form>
+</section>
+<footer></footer>
+</div>
+</body>
+</html>
+	
